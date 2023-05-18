@@ -26,7 +26,7 @@
                                     <constraint firstAttribute="width" constant="300" id="Zed-IB-YoM"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                             </textField>
                             <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="pFf-xq-2hY">
                                 <rect key="frame" x="365" y="315" width="25" height="25"/>
@@ -46,6 +46,9 @@
                                 <state key="normal" title="Сгенерировать">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
+                                <connections>
+                                    <action selector="generatesPassword" destination="BYZ-38-t0r" eventType="touchUpInside" id="IdM-9G-GUh"/>
+                                </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PK9-10-qBu">
                                 <rect key="frame" x="57" y="425" width="300" height="40"/>
@@ -89,6 +92,8 @@
                     </view>
                     <connections>
                         <outlet property="button" destination="3g4-cd-RKK" id="yGm-KB-boF"/>
+                        <outlet property="generationButton" destination="I17-cY-qJF" id="c6a-Qi-ffu"/>
+                        <outlet property="textField" destination="yVO-Mf-Aze" id="eqS-p0-zo0"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

@@ -5,9 +5,22 @@ class ViewController: UIViewController {
     // MARK: - IBOutlets and IBActions
 
     @IBOutlet weak var button: UIButton!
+    @IBOutlet weak var textField: UITextField!
+    @IBOutlet weak var generationButton: UIButton!
 
     @IBAction func onBut(_ sender: Any) {
         isBlack.toggle()
+    }
+
+    @IBAction func generatesPassword() {
+        let countCharactersInPassword = Int.random(in: 4...6)
+        let allowedCharacters: [String] = String().toGenerate.map { String($0) }
+        let countAllowedCharacters = allowedCharacters.count
+        var result = ""
+        while result.count != countCharactersInPassword {
+            result += allowedCharacters[Int.random(in: 0...countAllowedCharacters)]
+        }
+        self.textField.text = result
     }
 
     // MARK: - Properties
@@ -24,7 +37,7 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-//        self.bruteForce(passwordToUnlock: "1!gr")
+        //        self.bruteForce(passwordToUnlock: "1!gr")
     }
 
     // MARK: - Actions
