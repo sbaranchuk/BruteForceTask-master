@@ -24,7 +24,7 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.bruteForce(passwordToUnlock: "1!gr")
+//        self.bruteForce(passwordToUnlock: "1!gr")
     }
 
     // MARK: - Actions
