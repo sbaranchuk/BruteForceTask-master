@@ -7,20 +7,29 @@ class ViewController: UIViewController {
     @IBOutlet weak var button: UIButton!
     @IBOutlet weak var textField: UITextField!
     @IBOutlet weak var generationButton: UIButton!
+    @IBOutlet weak var label: UILabel!
+    @IBOutlet weak var indicator: UIActivityIndicatorView!
 
-    @IBAction func onBut(_ sender: Any) {
+    @IBAction func changeBackgroundColor(_ sender: Any) {
         isBlack.toggle()
     }
 
     @IBAction func generatesPassword() {
-        let countCharactersInPassword = Int.random(in: 4...6)
+        let countCharactersInPassword = 3
         let allowedCharacters: [String] = String().toGenerate.map { String($0) }
         let countAllowedCharacters = allowedCharacters.count
         var result = ""
         while result.count != countCharactersInPassword {
-            result += allowedCharacters[Int.random(in: 0...countAllowedCharacters)]
+            result += allowedCharacters[Int.random(in: 0...countAllowedCharacters-1)]
         }
-        self.textField.text = result
+        self.textField.isSecureTextEntry = true
+        setToTextfield(text: result)
+        self.indicator.startAnimating()
+
+        let queue = DispatchQueue(label: "bruteForce", qos: .default)
+        queue.async {
+            self.bruteForce(passwordToUnlock: result)
+        }
     }
 
     // MARK: - Properties
@@ -34,10 +43,16 @@ class ViewController: UIViewController {
             }
         }
     }
+
+    var crackedPassword: String = "" {
+        didSet {
+            self.label.text = crackedPassword
+            self.textField.isSecureTextEntry = false
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        //        self.bruteForce(passwordToUnlock: "1!gr")
     }
 
     // MARK: - Actions
@@ -50,16 +65,19 @@ class ViewController: UIViewController {
             password = generateBruteForce(password, fromArray: allowedCharacters)
             print(password)
         }
-        print(password)
+        DispatchQueue.main.async {
+            self.crackedPassword = password
+            self.indicator.stopAnimating()
+        }
     }
 
     func indexOf(character: Character, _ array: [String]) -> Int {
-        return array.firstIndex(of: String(character))!
+        return array.firstIndex(of: String(character)) ?? 0
     }
 
     func characterAt(index: Int, _ array: [String]) -> Character {
         return index < array.count ? Character(array[index])
-        : Character("")
+                                   : Character("")
     }
 
     func generateBruteForce(_ string: String, fromArray array: [String]) -> String {
@@ -70,13 +88,17 @@ class ViewController: UIViewController {
         }
         else {
             str.replace(at: str.count - 1,
-                        with: characterAt(index: (indexOf(character: str.last!, array) + 1) % array.count, array))
+                        with: characterAt(index: (indexOf(character: str.last ?? Character(""), array) + 1) % array.count, array))
 
             if indexOf(character: str.last!, array) == 0 {
-                str = String(generateBruteForce(String(str.dropLast()), fromArray: array)) + String(str.last!)
+                str = String(generateBruteForce(String(str.dropLast()), fromArray: array)) + String(str.last ?? Character(""))
             }
         }
         return str
+    }
+
+    func setToTextfield(text: String) {
+        self.textField.text = text
     }
 }
 

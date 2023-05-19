@@ -71,7 +71,7 @@
                                     <color key="titleColor" name="AccentColor"/>
                                 </state>
                                 <connections>
-                                    <action selector="onBut:" destination="BYZ-38-t0r" eventType="touchUpInside" id="XD4-sb-XPE"/>
+                                    <action selector="changeBackgroundColor:" destination="BYZ-38-t0r" eventType="touchUpInside" id="5hN-dG-hbl"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -93,6 +93,8 @@
                     <connections>
                         <outlet property="button" destination="3g4-cd-RKK" id="yGm-KB-boF"/>
                         <outlet property="generationButton" destination="I17-cY-qJF" id="c6a-Qi-ffu"/>
+                        <outlet property="indicator" destination="pFf-xq-2hY" id="auO-1k-k8s"/>
+                        <outlet property="label" destination="PK9-10-qBu" id="fMO-3W-ykc"/>
                         <outlet property="textField" destination="yVO-Mf-Aze" id="eqS-p0-zo0"/>
                     </connections>
                 </viewController>
