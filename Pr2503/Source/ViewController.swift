@@ -6,7 +6,7 @@ class ViewController: UIViewController {
 
     @IBOutlet weak var button: UIButton!
     @IBOutlet weak var textField: UITextField!
-    @IBOutlet weak var generationButton: UIButton!
+    @IBOutlet weak var bruteForceButton: UIButton!
     @IBOutlet weak var label: UILabel!
     @IBOutlet weak var indicator: UIActivityIndicatorView!
 
@@ -14,21 +14,13 @@ class ViewController: UIViewController {
         isBlack.toggle()
     }
 
-    @IBAction func generatesPassword() {
-        let countCharactersInPassword = 3
-        let allowedCharacters: [String] = String().toGenerate.map { String($0) }
-        let countAllowedCharacters = allowedCharacters.count
-        var result = ""
-        while result.count != countCharactersInPassword {
-            result += allowedCharacters[Int.random(in: 0...countAllowedCharacters-1)]
-        }
-        self.textField.isSecureTextEntry = true
-        setToTextfield(text: result)
+    @IBAction func startBruteForce() {
         self.indicator.startAnimating()
+        let secretPassword = self.textField.text ?? ""
 
         let queue = DispatchQueue(label: "bruteForce", qos: .default)
         queue.async {
-            self.bruteForce(passwordToUnlock: result)
+            self.bruteForce(passwordToUnlock: secretPassword)
         }
     }
 

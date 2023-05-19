@@ -43,11 +43,11 @@
                                     <constraint firstAttribute="width" constant="300" id="yoF-Ha-G7t"/>
                                 </constraints>
                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                <state key="normal" title="Сгенерировать">
+                                <state key="normal" title="Начать BF">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
                                 <connections>
-                                    <action selector="generatesPassword" destination="BYZ-38-t0r" eventType="touchUpInside" id="IdM-9G-GUh"/>
+                                    <action selector="startBruteForce" destination="BYZ-38-t0r" eventType="touchUpInside" id="IZb-lg-Gc9"/>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PK9-10-qBu">
@@ -91,8 +91,8 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="bruteForceButton" destination="I17-cY-qJF" id="Hqi-dy-sJS"/>
                         <outlet property="button" destination="3g4-cd-RKK" id="yGm-KB-boF"/>
-                        <outlet property="generationButton" destination="I17-cY-qJF" id="c6a-Qi-ffu"/>
                         <outlet property="indicator" destination="pFf-xq-2hY" id="auO-1k-k8s"/>
                         <outlet property="label" destination="PK9-10-qBu" id="fMO-3W-ykc"/>
                         <outlet property="textField" destination="yVO-Mf-Aze" id="eqS-p0-zo0"/>
