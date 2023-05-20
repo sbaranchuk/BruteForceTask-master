@@ -23,7 +23,7 @@
                                 <color key="backgroundColor" systemColor="systemGray6Color"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="4r7-pd-PAw"/>
-                                    <constraint firstAttribute="width" constant="300" id="Zed-IB-YoM"/>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="300" id="p2w-i0-LhL"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
@@ -40,7 +40,7 @@
                                 <color key="backgroundColor" name="AccentColor"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="gV0-li-bGn"/>
-                                    <constraint firstAttribute="width" constant="300" id="yoF-Ha-G7t"/>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="300" id="yoF-Ha-G7t"/>
                                 </constraints>
                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                 <state key="normal" title="Начать BF">
@@ -50,21 +50,20 @@
                                     <action selector="startBruteForce" destination="BYZ-38-t0r" eventType="touchUpInside" id="IZb-lg-Gc9"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PK9-10-qBu">
-                                <rect key="frame" x="57" y="425" width="300" height="40"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PK9-10-qBu">
+                                <rect key="frame" x="57" y="491" width="300" height="40"/>
                                 <color key="backgroundColor" systemColor="systemGray6Color"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="300" id="KP3-ny-yKO"/>
-                                    <constraint firstAttribute="height" constant="40" id="zer-IZ-Gnu"/>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="300" id="KP3-ny-yKO"/>
+                                    <constraint firstAttribute="height" constant="40" id="uLp-kJ-7TC"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3g4-cd-RKK">
-                                <rect key="frame" x="57" y="535" width="300" height="40"/>
+                                <rect key="frame" x="57" y="601" width="300" height="40"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="300" id="Nnd-dT-CbL"/>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="300" id="Nnd-dT-CbL"/>
                                     <constraint firstAttribute="height" constant="40" id="ZTT-fb-9RN"/>
                                 </constraints>
                                 <state key="normal" title="Сменить цвет">
@@ -74,15 +73,32 @@
                                     <action selector="changeBackgroundColor:" destination="BYZ-38-t0r" eventType="touchUpInside" id="5hN-dG-hbl"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YP3-lt-VmZ">
+                                <rect key="frame" x="57" y="431" width="300" height="40"/>
+                                <color key="backgroundColor" name="AccentColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="300" id="BbB-dZ-pzt"/>
+                                    <constraint firstAttribute="height" constant="40" id="czp-B3-x3f"/>
+                                </constraints>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="Остановить">
+                                    <color key="baseForegroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </buttonConfiguration>
+                                <connections>
+                                    <action selector="stopBruteForce" destination="BYZ-38-t0r" eventType="touchUpInside" id="s7k-wX-4kf"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="PK9-10-qBu" firstAttribute="top" secondItem="YP3-lt-VmZ" secondAttribute="bottom" constant="20" id="07k-Vm-YLD"/>
                             <constraint firstItem="3g4-cd-RKK" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="2oC-jH-MNE"/>
                             <constraint firstItem="I17-cY-qJF" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="4SJ-MF-ghY"/>
                             <constraint firstItem="pFf-xq-2hY" firstAttribute="leading" secondItem="yVO-Mf-Aze" secondAttribute="trailing" constant="8" id="66w-09-sd6"/>
                             <constraint firstItem="I17-cY-qJF" firstAttribute="top" secondItem="yVO-Mf-Aze" secondAttribute="bottom" constant="20" id="ChJ-BI-3o0"/>
-                            <constraint firstItem="PK9-10-qBu" firstAttribute="top" secondItem="I17-cY-qJF" secondAttribute="bottom" constant="20" id="LZI-Vd-dpE"/>
+                            <constraint firstItem="YP3-lt-VmZ" firstAttribute="top" secondItem="I17-cY-qJF" secondAttribute="bottom" constant="26" id="EeT-ev-kmx"/>
+                            <constraint firstItem="YP3-lt-VmZ" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="FfC-I9-HlC"/>
                             <constraint firstItem="yVO-Mf-Aze" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="257" id="OOr-ir-d1a"/>
                             <constraint firstItem="yVO-Mf-Aze" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="OiS-Ub-oI6"/>
                             <constraint firstItem="3g4-cd-RKK" firstAttribute="top" secondItem="PK9-10-qBu" secondAttribute="bottom" constant="70" id="TQi-uf-Uvg"/>
@@ -95,6 +111,7 @@
                         <outlet property="button" destination="3g4-cd-RKK" id="yGm-KB-boF"/>
                         <outlet property="indicator" destination="pFf-xq-2hY" id="auO-1k-k8s"/>
                         <outlet property="label" destination="PK9-10-qBu" id="fMO-3W-ykc"/>
+                        <outlet property="stopButton" destination="YP3-lt-VmZ" id="7Zb-p8-F4B"/>
                         <outlet property="textField" destination="yVO-Mf-Aze" id="eqS-p0-zo0"/>
                     </connections>
                 </viewController>

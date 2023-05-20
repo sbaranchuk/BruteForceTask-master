@@ -9,20 +9,7 @@ class ViewController: UIViewController {
     @IBOutlet weak var bruteForceButton: UIButton!
     @IBOutlet weak var label: UILabel!
     @IBOutlet weak var indicator: UIActivityIndicatorView!
-
-    @IBAction func changeBackgroundColor(_ sender: Any) {
-        isBlack.toggle()
-    }
-
-    @IBAction func startBruteForce() {
-        self.indicator.startAnimating()
-        let secretPassword = self.textField.text ?? ""
-
-        let queue = DispatchQueue(label: "bruteForce", qos: .default)
-        queue.async {
-            self.bruteForce(passwordToUnlock: secretPassword)
-        }
-    }
+    @IBOutlet weak var stopButton: UIButton!
 
     // MARK: - Properties
 
@@ -39,58 +26,54 @@ class ViewController: UIViewController {
     var crackedPassword: String = "" {
         didSet {
             self.label.text = crackedPassword
-            self.textField.isSecureTextEntry = false
         }
     }
-    
+
+    let bruteForceOperation = BruteForceOperation()
+
+    // MARK: - viewDidLoad()
+
     override func viewDidLoad() {
         super.viewDidLoad()
     }
 
     // MARK: - Actions
-    
-    func bruteForce(passwordToUnlock: String) {
-        let allowedCharacters: [String] = String().printable.map { String($0) }
-        var password: String = ""
 
-        while password != passwordToUnlock {
-            password = generateBruteForce(password, fromArray: allowedCharacters)
-            print(password)
-        }
-        DispatchQueue.main.async {
-            self.crackedPassword = password
-            self.indicator.stopAnimating()
-        }
+    @IBAction func changeBackgroundColor(_ sender: Any) {
+        isBlack.toggle()
     }
 
-    func indexOf(character: Character, _ array: [String]) -> Int {
-        return array.firstIndex(of: String(character)) ?? 0
-    }
+    @IBAction func startBruteForce() {
+        self.indicator.startAnimating()
+        let secretPassword = self.textField.text ?? ""
+        var result: String = ""
 
-    func characterAt(index: Int, _ array: [String]) -> Character {
-        return index < array.count ? Character(array[index])
-                                   : Character("")
-    }
+        bruteForceOperation.passwordToUnlock = secretPassword
 
-    func generateBruteForce(_ string: String, fromArray array: [String]) -> String {
-        var str: String = string
+        let queue = OperationQueue()
 
-        if str.count <= 0 {
-            str.append(characterAt(index: 0, array))
+        let resultAssignmentBlockOperation = BlockOperation {
+            result = self.bruteForceOperation.result
         }
-        else {
-            str.replace(at: str.count - 1,
-                        with: characterAt(index: (indexOf(character: str.last ?? Character(""), array) + 1) % array.count, array))
 
-            if indexOf(character: str.last!, array) == 0 {
-                str = String(generateBruteForce(String(str.dropLast()), fromArray: array)) + String(str.last ?? Character(""))
+        let showResultBlockOperation = BlockOperation {
+            DispatchQueue.main.async {
+                self.textField.isSecureTextEntry = false
+                if result != "" {
+                    self.crackedPassword = result
+                } else {
+                    self.crackedPassword = "Пароль \(secretPassword) не взломан."
+                }
+                self.indicator.stopAnimating()
             }
         }
-        return str
+        resultAssignmentBlockOperation.addDependency(bruteForceOperation)
+        showResultBlockOperation.addDependency(resultAssignmentBlockOperation)
+        queue.addOperations([bruteForceOperation, resultAssignmentBlockOperation, showResultBlockOperation], waitUntilFinished: false)
     }
 
-    func setToTextfield(text: String) {
-        self.textField.text = text
+    @IBAction func stopBruteForce() {
+        self.bruteForceOperation.cancel()
+        self.indicator.stopAnimating()
     }
 }
-
